@@ -14,6 +14,19 @@ window.onload = function(e){
     try{
         if (window.location.href.includes(".md")){
             console.log("first stage")
+
+            // Getting the whole readme element (CONENT)
+            var readme = document.getElementById("readme");
+
+            // Cloning -- Deep Copy
+            var readme_copy = readme.cloneNode(true);
+
+            // Getting the body element
+            var body = document.body;
+
+            // Getting the head element
+            var head = document.head;
+
         }
     }
     catch(err){
