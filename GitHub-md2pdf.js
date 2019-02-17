@@ -16,16 +16,39 @@ window.onload = function(e){
             console.log("first stage")
 
             // Getting the whole readme element (CONENT)
-            var readme = document.getElementById("readme");
+            var node = document.getElementById("readme");
 
             // Cloning -- Deep Copy
-            var readme_copy = readme.cloneNode(true);
+            var readme = node.cloneNode(true);
 
             // Getting the body element
             var body = document.body;
 
-            // Getting the head element
-            var head = document.head;
+            // Initialize a list of parents node
+            var list_of_parents = [];
+
+            // Generate a list of parents node
+            while (node.parentNode != body){
+
+                list_of_parents.push(node);
+                node = node.parentElement;
+            }
+            list_of_parents.push(node.parentElement)
+
+            // Iterate through body and remove all nodes that are not in list
+            while (body != document.getElementById("readme")){
+                var current = list_of_parents.pop();
+                var children = body.children;
+                
+                for (var i = 0; i < children.length; i++) {
+                    if (children[i] != current){
+                        body.remove(children[i]);
+                    }
+                }
+                body = current;
+            }
+
+
 
         }
     }
