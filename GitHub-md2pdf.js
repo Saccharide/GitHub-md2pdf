@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         GitHub generated Markdown
-// @version      0.1
+// @version      1.0
 // @description  try to take over the world!
 // @author       MonoSacchride
 // @include *
@@ -13,7 +13,6 @@
 window.onload = function(e){
     try{
         if (window.location.href.includes(".md")){
-            console.log("first stage")
 
             // Getting the whole readme element (CONENT)
             var node = document.getElementById("readme");
@@ -31,25 +30,37 @@ window.onload = function(e){
             while (node.parentNode != body){
 
                 list_of_parents.push(node);
-                node = node.parentElement;
+                node = node.parentNode;
             }
-            list_of_parents.push(node.parentElement)
-
+            list_of_parents.push(node)
+            // console.log("Before: List of parents = ", list_of_parents);
+            var new_node = document.getElementById("readme");
             // Iterate through body and remove all nodes that are not in list
-            while (body != document.getElementById("readme")){
+            while (body != new_node){
                 var current = list_of_parents.pop();
+                // console.log("Current = ", current);
                 var children = body.children;
-                
-                for (var i = 0; i < children.length; i++) {
-                    if (children[i] != current){
-                        body.remove(children[i]);
+                // console.log("children = ", children);
+                while(children.length > 1){
+                    for (var i = 0; i < children.length; i++) {
+                        if (children[i] != current){
+                            // console.log("Removing --> ", children[i]);
+                            body.removeChild(children[i]);
+                        }
+                        else{
+                            // console.log("find one match", i);
+                            // console.log("Current == children[i]");
+                            // console.log("---------------------------------");
+                            // console.log("Current: ",current);
+                            // console.log("children[i]: ",children[i]);
+                            // console.log("---------------------------------");
+                            // console.log(body);
+                        }
                     }
                 }
                 body = current;
             }
-
-
-
+            // console.log("After: List of parents = ", list_of_parents);
         }
     }
     catch(err){
