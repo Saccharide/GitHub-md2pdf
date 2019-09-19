@@ -35,6 +35,7 @@ window.onload = function(e){
             list_of_parents.push(node)
             // console.log("Before: List of parents = ", list_of_parents);
             var new_node = document.getElementById("readme");
+            new_node.parentNode.style.border="0px";
             // Iterate through body and remove all nodes that are not in list
             while (body != new_node){
                 var current = list_of_parents.pop();
